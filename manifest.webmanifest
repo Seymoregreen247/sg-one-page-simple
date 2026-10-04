@@ -1,15 +1,14 @@
 {
-  "name": "Seymore Green Order Form",
-  "short_name": "SG Order",
-  "description": "Order custom shirts and buttons from Seymore Green, Roslindale.",
-  "start_url": "/?source=app",
+  "name": "Staff Shirts by Seymore Green",
+  "short_name": "Staff Shirts",
+  "description": "Simple staff shirt ordering from Seymore Green.",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#f3f6f1",
+  "background_color": "#ffffff",
   "theme_color": "#1e1e1e",
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {"src":"/icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"/icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }
