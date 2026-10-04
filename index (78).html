@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seymore Green Business Order Form: Custom Tees</title>
+<meta name="description" content="Order custom t-shirts and buttons from Seymore Green, Roslindale.">
+<meta name="theme-color" content="#1e1e1e">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/icons/favicon-48.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SG Order">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#4BBB2A;--green-ink:#2E7D1A;--ink:#1e1e1e;--gray:#B6B6B6;--paper:#ffffff;--wash:#f3f6f1}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--wash);color:var(--ink);font-family:'Archivo','Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.45}
+.wrap{max-width:680px;margin:0 auto;padding:24px 16px 56px}
+.sheet{background:var(--paper);border:3px solid var(--ink)}
+.display{font-family:'Anton',Impact,sans-serif;font-weight:400;letter-spacing:.5px;line-height:1}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:3px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;font-size:26px}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--green);border:3px solid var(--ink);flex:none}
+header small{font-size:14px;font-weight:600;text-align:right}
+.intro{padding:22px 20px 6px}
+.intro h1{font-size:clamp(40px,9vw,58px);margin:0 0 8px}
+.intro p{margin:0;max-width:52ch}
+section{padding:18px 20px;border-top:2px solid var(--ink)}
+section:first-of-type{border-top:0}
+h2{font-size:28px;margin:0 0 4px}
+.sub{margin:0 0 14px;font-size:15px}
+label{display:block;font-weight:600;font-size:15px;margin-bottom:4px}
+input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],select,textarea{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:2px solid var(--ink);border-radius:0;background:#fff;color:var(--ink)}
+textarea{min-height:96px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible,.check input:focus-visible{outline:3px solid var(--green-ink);outline-offset:2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.req{color:var(--green-ink)}
+
+/* the tee block is the loud one */
+.tees{background:var(--ink);color:#fff;border-top:3px solid var(--ink)}
+.tees .head{display:flex;align-items:center;gap:18px;margin-bottom:12px}
+.price{width:112px;height:112px;flex:none;border-radius:50%;background:var(--green);color:var(--ink);border:5px solid #fff;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.price span:first-child{margin-bottom:2px}
+.price b{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:44px;line-height:.95}
+.price span{font-size:12px;font-weight:800}
+.tees h2{font-size:36px}
+.tees .sub{color:#e8e8e8;margin:0}
+.tees label{color:#fff}
+.tees input,.tees select{border-color:#fff}
+.sizes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:6px 0 4px}
+.sizes label{text-align:center;font-size:14px}
+.sizes .up{display:block;font-weight:400;font-size:12px;color:#d6d6d6}
+.sizes input{text-align:center;padding:10px 4px}
+.tee-note{font-size:14px;color:#e8e8e8;margin:8px 0 0}
+.pack-nudge,.pack-on{display:none;margin-top:10px;padding:10px 12px;font-size:15px;font-weight:600}
+.pack-nudge{border:2px dashed var(--green)}
+.pack-on{background:var(--green);color:var(--ink)}
+.pack-nudge.show,.pack-on.show{display:block}
+.warn{display:none;margin-top:10px;background:#fff;color:var(--ink);border-left:6px solid var(--green);padding:8px 12px;font-size:15px;font-weight:600}
+.warn.show{display:block}
+
+.pack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pack label{margin:0;cursor:pointer;border:2px solid var(--ink);padding:10px 8px;text-align:center;font-weight:600;font-size:15px;position:relative}
+.pack input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.pack label strong{display:block;font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:24px}
+.pack label:has(input:checked){background:var(--green)}
+.pack label:has(input:focus-visible){outline:3px solid var(--green-ink);outline-offset:2px}
+.check{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:12px;border:2px dashed var(--ink);font-weight:600}
+.check input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--green-ink)}
+.check small{display:block;font-weight:400;font-size:14px}
+
+.total{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-top:3px solid var(--ink);background:var(--green)}
+.total .display{font-size:44px}
+.total p{margin:0;font-size:14px;font-weight:600;max-width:30ch}
+.submit{padding:18px 20px 22px}
+button{width:100%;font:inherit;font-family:'Anton',Impact,sans-serif;font-size:26px;letter-spacing:1px;padding:14px;background:var(--ink);color:#fff;border:0;cursor:pointer;min-height:56px}
+button:hover{background:#000}
+button[disabled]{opacity:.6;cursor:wait}
+.err{color:#b00020;font-weight:600;margin:10px 0 0;min-height:1em}
+
+.pay{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.qr{display:flex;flex-direction:column;align-items:center;font-size:13px;font-weight:600;gap:4px}
+.qr svg{width:104px;height:104px;background:#fff;border:2px solid var(--ink);padding:4px}
+.pay p{margin:0;flex:1 1 200px;font-size:15px}
+footer{padding:16px 20px;border-top:3px solid var(--ink);font-size:15px}
+footer a{color:var(--ink);font-weight:800}
+.done{padding:40px 20px;text-align:center}
+.done h2{font-size:44px}
+.hidden{display:none}
+.install{display:none;align-items:center;gap:12px;padding:12px 20px;background:var(--green);border-bottom:3px solid var(--ink);font-weight:600;font-size:15px}
+.install.show{display:flex}
+.install p{margin:0;flex:1}
+.install button{width:auto;min-height:44px;font-size:18px;padding:8px 16px}
+.install .x{background:transparent;color:var(--ink);font-family:inherit;font-size:22px;padding:4px 10px}
+@media (max-width:520px){
+ .row{grid-template-columns:1fr}
+ .sizes{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .pack{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .price{width:92px;height:92px}.price b{font-size:36px}
+ header small{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="sheet">
+<div class="install" id="installBar" role="region" aria-label="Install app">
+ <p id="installMsg">Add the Seymore Green order form to your home screen for quick reorders.</p>
+ <button type="button" id="installBtn">Add to home screen</button>
+ <button type="button" class="x" id="installClose" aria-label="Dismiss">&times;</button>
+</div>
+<header>
+ <div class="brand display"><span class="dot" aria-hidden="true"></span>SEYMORE GREEN</div>
+ <small>35 Poplar St, Roslindale<br>Mon–Sat, 10am–6pm</small>
+</header>
+
+<div class="intro">
+ <h1 class="display">Custom shirts for your business</h1>
+ <p>Staff shirts, event shirts, and team gear for local businesses. Fill this out and we'll confirm your order, send a proof, and let you know when it's ready for pickup. No payment yet.</p>
+</div>
+
+<form id="order" name="sg-order" method="POST" data-netlify="true" netlify-honeypot="company_website" enctype="multipart/form-data" action="/">
+<input type="hidden" name="form-name" value="sg-order">
+<p class="hidden"><label>Leave this empty <input name="company_website"></label></p>
+<input type="hidden" name="estimated_total" id="estTotal" value="$0">
+<input type="hidden" name="shirt_count" id="shirtCount" value="0">
+<input type="hidden" name="business_pack_free_buttons" id="bizPack" value="No">
+
+<section>
+ <h2 class="display">Your info</h2>
+ <div class="row">
+  <div class="field"><label for="name">Name <span class="req">*</span></label><input type="text" id="name" name="name" autocomplete="name" required></div>
+  <div class="field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" autocomplete="email" required></div>
+ </div>
+ <div class="row">
+  <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+  <div class="field"><label for="group">Business name <span class="req">*</span></label><input type="text" id="group" name="business" autocomplete="organization" required></div>
+ </div>
+</section>
+
+<section class="tees">
+ <div class="head">
+  <div class="price" aria-hidden="true"><span>FROM</span><b>$18</b><span>PER SHIRT</span></div>
+  <div>
+   <h2 class="display">Custom t-shirts</h2>
+   <p class="sub">Your design printed on the front and back. 12-shirt minimum.<br><strong>Business Pack:</strong> order 24 or more and get 25 matching buttons free.</p>
+  </div>
+ </div>
+ <div class="field"><label for="printStyle">Print style</label>
+  <select id="printStyle" name="print_style">
+   <option value="One color" data-price="18">One color, front + back: $18 per shirt</option>
+   <option value="Full color" data-price="22">Full color, front + back: $22 per shirt</option>
+  </select></div>
+ <div class="row">
+  <div class="field"><label for="shirtColor">Shirt color</label>
+   <select id="shirtColor" name="shirt_color">
+    <option>Black</option><option>White</option><option>Maroon</option><option>Heather gray</option><option>Navy</option><option>Other (tell us in notes)</option>
+   </select></div>
+  <div class="field"><label for="inkColor">Print color (one-color designs)</label><input type="text" id="inkColor" name="print_color" placeholder="e.g. white, green, gold"></div>
+ </div>
+ <label id="sizesLbl">How many of each size?</label>
+ <div class="sizes" role="group" aria-labelledby="sizesLbl">
+  <div><label for="qS">S</label><input type="number" id="qS" name="qty_S" min="0" inputmode="numeric" value="0" data-up="0"></div>
+  <div><label for="qM">M</label><input type="number" id="qM" name="qty_M" min="0" inputmode="numeric" value="0" data-up="0"></div>
+  <div><label for="qL">L</label><input type="number" id="qL" name="qty_L" min="0" inputmode="numeric" value="0" data-up="0"></div>
+  <div><label for="qXL">XL</label><input type="number" id="qXL" name="qty_XL" min="0" inputmode="numeric" value="0" data-up="0"></div>
+  <div><label for="q2XL">2XL <span class="up">+$2</span></label><input type="number" id="q2XL" name="qty_2XL" min="0" inputmode="numeric" value="0" data-up="2"></div>
+  <div><label for="q3XL">3XL <span class="up">+$4</span></label><input type="number" id="q3XL" name="qty_3XL" min="0" inputmode="numeric" value="0" data-up="4"></div>
+ </div>
+ <p class="tee-note" id="teeCount">0 shirts</p>
+ <div class="pack-nudge" id="packNudge" role="status">Add <span id="packNeed">12</span> more shirts to unlock the Business Pack: 25 free matching buttons.</div>
+ <div class="pack-on" id="packOn" role="status"><strong>Business Pack unlocked.</strong> 25 matching buttons are included free with this order.</div>
+ <div class="warn" id="minWarn" role="status">Shirt orders start at 12. Add <span id="needMore">12</span> more to place this order.</div>
+</section>
+
+<section>
+ <h2 class="display">Add buttons (optional)</h2>
+ <p class="sub">2.25" round pin buttons, full color, one design. Need 3" or more than one design? Say so in the notes and we'll quote it.</p>
+ <div class="pack" role="radiogroup" aria-label="Button package">
+  <label><input type="radio" name="button_package" value="None" data-price="0" checked>No buttons<strong>$0</strong></label>
+  <label><input type="radio" name="button_package" value="25 buttons" data-price="50">25 buttons<strong>$50</strong></label>
+  <label><input type="radio" name="button_package" value="50 buttons" data-price="85">50 buttons<strong>$85</strong></label>
+  <label><input type="radio" name="button_package" value="100 buttons" data-price="125">100 buttons<strong>$125</strong></label>
+  <label><input type="radio" name="button_package" value="300 buttons" data-price="300">300 buttons<strong>$300</strong></label>
+  <label><input type="radio" name="button_package" value="500 buttons" data-price="450">500 buttons<strong>$450</strong></label>
+ </div>
+ <label class="check" for="combo"><input type="checkbox" id="combo" name="combo_25_buttons_40" value="Yes">
+  <span>Combo: add 25 matching buttons to my shirt order for $40<small id="comboNote">Uses your shirt design. Available on orders of 12–23 shirts. At 24+ they're free.</small></span></label>
+</section>
+
+<section>
+ <h2 class="display">Design &amp; timing</h2>
+ <div class="row">
+  <div class="field"><label for="artShirt">T-shirt design</label><input type="file" id="artShirt" name="shirt_design" accept="image/*,.pdf,.ai,.eps,.svg"></div>
+  <div class="field"><label for="artButton">Button design</label><input type="file" id="artButton" name="button_design" accept="image/*,.pdf,.ai,.eps,.svg"></div>
+ </div>
+ <p class="sub" style="margin-top:-4px">Using the same design for both? Just upload it once in the t-shirt box. Files up to 8 MB total.</p>
+ <div class="field"><label for="needBy">Need it by</label><input type="date" id="needBy" name="need_by"></div>
+ <div class="field"><label for="notes">Notes</label><textarea id="notes" name="notes" placeholder="What goes on the front and back, names, dates, anything else we should know"></textarea></div>
+</section>
+
+<div class="total">
+ <div><div style="font-size:14px;font-weight:800">Estimated total</div><div class="display" id="totalOut">$0</div></div>
+ <p>Final price is confirmed with your proof. We'll reach out before anything prints.</p>
+</div>
+<div class="submit">
+ <button type="submit" id="sendBtn">Send my order</button>
+ <p class="err" id="formErr" role="alert"></p>
+</div>
+</form>
+
+<div class="done hidden" id="done" tabindex="-1">
+ <h2 class="display">Order sent</h2>
+ <p>Thanks! We'll email you a proof and a final price. Questions? Call or text 844-4-SEYMOR.</p>
+</div>
+
+<section style="border-top:3px solid var(--ink)">
+ <h2 class="display">Paying</h2>
+ <div class="pay">
+  <div class="qr"><svg role="img" aria-label="QR code"  version="1.1" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg"><path d="M1,1H2V2H1zM2,1H3V2H2zM3,1H4V2H3zM4,1H5V2H4zM5,1H6V2H5zM6,1H7V2H6zM7,1H8V2H7zM9,1H10V2H9zM10,1H11V2H10zM11,1H12V2H11zM12,1H13V2H12zM13,1H14V2H13zM14,1H15V2H14zM15,1H16V2H15zM17,1H18V2H17zM18,1H19V2H18zM19,1H20V2H19zM23,1H24V2H23zM24,1H25V2H24zM25,1H26V2H25zM26,1H27V2H26zM27,1H28V2H27zM28,1H29V2H28zM29,1H30V2H29zM1,2H2V3H1zM7,2H8V3H7zM10,2H11V3H10zM13,2H14V3H13zM14,2H15V3H14zM15,2H16V3H15zM16,2H17V3H16zM20,2H21V3H20zM23,2H24V3H23zM29,2H30V3H29zM1,3H2V4H1zM3,3H4V4H3zM4,3H5V4H4zM5,3H6V4H5zM7,3H8V4H7zM10,3H11V4H10zM11,3H12V4H11zM12,3H13V4H12zM13,3H14V4H13zM15,3H16V4H15zM18,3H19V4H18zM19,3H20V4H19zM23,3H24V4H23zM25,3H26V4H25zM26,3H27V4H26zM27,3H28V4H27zM29,3H30V4H29zM1,4H2V5H1zM3,4H4V5H3zM4,4H5V5H4zM5,4H6V5H5zM7,4H8V5H7zM9,4H10V5H9zM11,4H12V5H11zM13,4H14V5H13zM19,4H20V5H19zM20,4H21V5H20zM21,4H22V5H21zM23,4H24V5H23zM25,4H26V5H25zM26,4H27V5H26zM27,4H28V5H27zM29,4H30V5H29zM1,5H2V6H1zM3,5H4V6H3zM4,5H5V6H4zM5,5H6V6H5zM7,5H8V6H7zM9,5H10V6H9zM10,5H11V6H10zM11,5H12V6H11zM12,5H13V6H12zM18,5H19V6H18zM19,5H20V6H19zM23,5H24V6H23zM25,5H26V6H25zM26,5H27V6H26zM27,5H28V6H27zM29,5H30V6H29zM1,6H2V7H1zM7,6H8V7H7zM9,6H10V7H9zM12,6H13V7H12zM17,6H18V7H17zM18,6H19V7H18zM20,6H21V7H20zM23,6H24V7H23zM29,6H30V7H29zM1,7H2V8H1zM2,7H3V8H2zM3,7H4V8H3zM4,7H5V8H4zM5,7H6V8H5zM6,7H7V8H6zM7,7H8V8H7zM9,7H10V8H9zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM17,7H18V8H17zM19,7H20V8H19zM21,7H22V8H21zM23,7H24V8H23zM24,7H25V8H24zM25,7H26V8H25zM26,7H27V8H26zM27,7H28V8H27zM28,7H29V8H28zM29,7H30V8H29zM9,8H10V9H9zM13,8H14V9H13zM14,8H15V9H14zM16,8H17V9H16zM17,8H18V9H17zM18,8H19V9H18zM19,8H20V9H19zM21,8H22V9H21zM1,9H2V10H1zM5,9H6V10H5zM7,9H8V10H7zM8,9H9V10H8zM9,9H10V10H9zM10,9H11V10H10zM11,9H12V10H11zM12,9H13V10H12zM14,9H15V10H14zM18,9H19V10H18zM20,9H21V10H20zM21,9H22V10H21zM22,9H23V10H22zM23,9H24V10H23zM24,9H25V10H24zM25,9H26V10H25zM26,9H27V10H26zM29,9H30V10H29zM2,10H3V11H2zM3,10H4V11H3zM5,10H6V11H5zM9,10H10V11H9zM11,10H12V11H11zM12,10H13V11H12zM14,10H15V11H14zM15,10H16V11H15zM17,10H18V11H17zM23,10H24V11H23zM25,10H26V11H25zM26,10H27V11H26zM27,10H28V11H27zM28,10H29V11H28zM29,10H30V11H29zM4,11H5V12H4zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM10,11H11V12H10zM17,11H18V12H17zM21,11H22V12H21zM24,11H25V12H24zM29,11H30V12H29zM2,12H3V13H2zM3,12H4V13H3zM6,12H7V13H6zM9,12H10V13H9zM11,12H12V13H11zM15,12H16V13H15zM18,12H19V13H18zM20,12H21V13H20zM22,12H23V13H22zM24,12H25V13H24zM25,12H26V13H25zM26,12H27V13H26zM28,12H29V13H28zM29,12H30V13H29zM1,13H2V14H1zM2,13H3V14H2zM4,13H5V14H4zM5,13H6V14H5zM7,13H8V14H7zM12,13H13V14H12zM13,13H14V14H13zM14,13H15V14H14zM15,13H16V14H15zM16,13H17V14H16zM17,13H18V14H17zM18,13H19V14H18zM20,13H21V14H20zM22,13H23V14H22zM28,13H29V14H28zM1,14H2V15H1zM5,14H6V15H5zM11,14H12V15H11zM13,14H14V15H13zM19,14H20V15H19zM23,14H24V15H23zM24,14H25V15H24zM25,14H26V15H25zM26,14H27V15H26zM27,14H28V15H27zM28,14H29V15H28zM29,14H30V15H29zM3,15H4V16H3zM4,15H5V16H4zM7,15H8V16H7zM8,15H9V16H8zM10,15H11V16H10zM14,15H15V16H14zM15,15H16V16H15zM16,15H17V16H16zM18,15H19V16H18zM19,15H20V16H19zM21,15H22V16H21zM22,15H23V16H22zM23,15H24V16H23zM25,15H26V16H25zM26,15H27V16H26zM27,15H28V16H27zM29,15H30V16H29zM1,16H2V17H1zM5,16H6V17H5zM6,16H7V17H6zM8,16H9V17H8zM10,16H11V17H10zM12,16H13V17H12zM14,16H15V17H14zM16,16H17V17H16zM17,16H18V17H17zM18,16H19V17H18zM19,16H20V17H19zM23,16H24V17H23zM24,16H25V17H24zM28,16H29V17H28zM29,16H30V17H29zM3,17H4V18H3zM5,17H6V18H5zM6,17H7V18H6zM7,17H8V18H7zM9,17H10V18H9zM10,17H11V18H10zM12,17H13V18H12zM14,17H15V18H14zM18,17H19V18H18zM21,17H22V18H21zM22,17H23V18H22zM24,17H25V18H24zM28,17H29V18H28zM1,18H2V19H1zM3,18H4V19H3zM4,18H5V19H4zM8,18H9V19H8zM9,18H10V19H9zM10,18H11V19H10zM11,18H12V19H11zM13,18H14V19H13zM14,18H15V19H14zM15,18H16V19H15zM17,18H18V19H17zM19,18H20V19H19zM22,18H23V19H22zM23,18H24V19H23zM24,18H25V19H24zM25,18H26V19H25zM26,18H27V19H26zM28,18H29V19H28zM29,18H30V19H29zM4,19H5V20H4zM5,19H6V20H5zM7,19H8V20H7zM8,19H9V20H8zM10,19H11V20H10zM12,19H13V20H12zM17,19H18V20H17zM19,19H20V20H19zM22,19H23V20H22zM23,19H24V20H23zM27,19H28V20H27zM29,19H30V20H29zM3,20H4V21H3zM5,20H6V21H5zM12,20H13V21H12zM13,20H14V21H13zM15,20H16V21H15zM18,20H19V21H18zM19,20H20V21H19zM21,20H22V21H21zM22,20H23V21H22zM23,20H24V21H23zM24,20H25V21H24zM28,20H29V21H28zM29,20H30V21H29zM1,21H2V22H1zM2,21H3V22H2zM4,21H5V22H4zM6,21H7V22H6zM7,21H8V22H7zM8,21H9V22H8zM9,21H10V22H9zM10,21H11V22H10zM14,21H15V22H14zM15,21H16V22H15zM16,21H17V22H16zM18,21H19V22H18zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM23,21H24V22H23zM24,21H25V22H24zM25,21H26V22H25zM26,21H27V22H26zM29,21H30V22H29zM9,22H10V23H9zM11,22H12V23H11zM13,22H14V23H13zM20,22H21V23H20zM21,22H22V23H21zM25,22H26V23H25zM29,22H30V23H29zM1,23H2V24H1zM2,23H3V24H2zM3,23H4V24H3zM4,23H5V24H4zM5,23H6V24H5zM6,23H7V24H6zM7,23H8V24H7zM9,23H10V24H9zM11,23H12V24H11zM13,23H14V24H13zM14,23H15V24H14zM15,23H16V24H15zM16,23H17V24H16zM17,23H18V24H17zM20,23H21V24H20zM21,23H22V24H21zM23,23H24V24H23zM25,23H26V24H25zM26,23H27V24H26zM27,23H28V24H27zM29,23H30V24H29zM1,24H2V25H1zM7,24H8V25H7zM11,24H12V25H11zM12,24H13V25H12zM13,24H14V25H13zM14,24H15V25H14zM18,24H19V25H18zM21,24H22V25H21zM25,24H26V25H25zM1,25H2V26H1zM3,25H4V26H3zM4,25H5V26H4zM5,25H6V26H5zM7,25H8V26H7zM9,25H10V26H9zM11,25H12V26H11zM12,25H13V26H12zM14,25H15V26H14zM16,25H17V26H16zM18,25H19V26H18zM20,25H21V26H20zM21,25H22V26H21zM22,25H23V26H22zM23,25H24V26H23zM24,25H25V26H24zM25,25H26V26H25zM26,25H27V26H26zM28,25H29V26H28zM29,25H30V26H29zM1,26H2V27H1zM3,26H4V27H3zM4,26H5V27H4zM5,26H6V27H5zM7,26H8V27H7zM10,26H11V27H10zM11,26H12V27H11zM15,26H16V27H15zM16,26H17V27H16zM17,26H18V27H17zM19,26H20V27H19zM22,26H23V27H22zM28,26H29V27H28zM1,27H2V28H1zM3,27H4V28H3zM4,27H5V28H4zM5,27H6V28H5zM7,27H8V28H7zM13,27H14V28H13zM14,27H15V28H14zM16,27H17V28H16zM18,27H19V28H18zM19,27H20V28H19zM20,27H21V28H20zM21,27H22V28H21zM26,27H27V28H26zM27,27H28V28H27zM28,27H29V28H28zM29,27H30V28H29zM1,28H2V29H1zM7,28H8V29H7zM11,28H12V29H11zM12,28H13V29H12zM15,28H16V29H15zM16,28H17V29H16zM18,28H19V29H18zM19,28H20V29H19zM21,28H22V29H21zM22,28H23V29H22zM23,28H24V29H23zM25,28H26V29H25zM26,28H27V29H26zM28,28H29V29H28zM29,28H30V29H29zM1,29H2V30H1zM2,29H3V30H2zM3,29H4V30H3zM4,29H5V30H4zM5,29H6V30H5zM6,29H7V30H6zM7,29H8V30H7zM9,29H10V30H9zM10,29H11V30H10zM11,29H12V30H11zM15,29H16V30H15zM18,29H19V30H18zM20,29H21V30H20zM21,29H22V30H21zM25,29H26V30H25zM26,29H27V30H26zM28,29H29V30H28z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg>Cash App<br>$iseymoregreen</div>
+  <div class="qr"><svg role="img" aria-label="QR code"  version="1.1" viewBox="0 0 31 31" xmlns="http://www.w3.org/2000/svg"><path d="M1,1H2V2H1zM2,1H3V2H2zM3,1H4V2H3zM4,1H5V2H4zM5,1H6V2H5zM6,1H7V2H6zM7,1H8V2H7zM14,1H15V2H14zM17,1H18V2H17zM18,1H19V2H18zM20,1H21V2H20zM23,1H24V2H23zM24,1H25V2H24zM25,1H26V2H25zM26,1H27V2H26zM27,1H28V2H27zM28,1H29V2H28zM29,1H30V2H29zM1,2H2V3H1zM7,2H8V3H7zM10,2H11V3H10zM14,2H15V3H14zM15,2H16V3H15zM16,2H17V3H16zM18,2H19V3H18zM21,2H22V3H21zM23,2H24V3H23zM29,2H30V3H29zM1,3H2V4H1zM3,3H4V4H3zM4,3H5V4H4zM5,3H6V4H5zM7,3H8V4H7zM10,3H11V4H10zM11,3H12V4H11zM12,3H13V4H12zM13,3H14V4H13zM14,3H15V4H14zM17,3H18V4H17zM18,3H19V4H18zM21,3H22V4H21zM23,3H24V4H23zM25,3H26V4H25zM26,3H27V4H26zM27,3H28V4H27zM29,3H30V4H29zM1,4H2V5H1zM3,4H4V5H3zM4,4H5V5H4zM5,4H6V5H5zM7,4H8V5H7zM10,4H11V5H10zM11,4H12V5H11zM12,4H13V5H12zM13,4H14V5H13zM14,4H15V5H14zM15,4H16V5H15zM16,4H17V5H16zM19,4H20V5H19zM20,4H21V5H20zM23,4H24V5H23zM25,4H26V5H25zM26,4H27V5H26zM27,4H28V5H27zM29,4H30V5H29zM1,5H2V6H1zM3,5H4V6H3zM4,5H5V6H4zM5,5H6V6H5zM7,5H8V6H7zM10,5H11V6H10zM11,5H12V6H11zM12,5H13V6H12zM13,5H14V6H13zM14,5H15V6H14zM15,5H16V6H15zM17,5H18V6H17zM18,5H19V6H18zM19,5H20V6H19zM23,5H24V6H23zM25,5H26V6H25zM26,5H27V6H26zM27,5H28V6H27zM29,5H30V6H29zM1,6H2V7H1zM7,6H8V7H7zM9,6H10V7H9zM13,6H14V7H13zM14,6H15V7H14zM15,6H16V7H15zM19,6H20V7H19zM20,6H21V7H20zM23,6H24V7H23zM29,6H30V7H29zM1,7H2V8H1zM2,7H3V8H2zM3,7H4V8H3zM4,7H5V8H4zM5,7H6V8H5zM6,7H7V8H6zM7,7H8V8H7zM9,7H10V8H9zM11,7H12V8H11zM13,7H14V8H13zM15,7H16V8H15zM17,7H18V8H17zM19,7H20V8H19zM21,7H22V8H21zM23,7H24V8H23zM24,7H25V8H24zM25,7H26V8H25zM26,7H27V8H26zM27,7H28V8H27zM28,7H29V8H28zM29,7H30V8H29zM15,8H16V9H15zM18,8H19V9H18zM19,8H20V9H19zM20,8H21V9H20zM1,9H2V10H1zM4,9H5V10H4zM6,9H7V10H6zM7,9H8V10H7zM9,9H10V10H9zM11,9H12V10H11zM12,9H13V10H12zM13,9H14V10H13zM16,9H17V10H16zM21,9H22V10H21zM22,9H23V10H22zM24,9H25V10H24zM1,10H2V11H1zM3,10H4V11H3zM4,10H5V11H4zM5,10H6V11H5zM8,10H9V11H8zM9,10H10V11H9zM10,10H11V11H10zM13,10H14V11H13zM15,10H16V11H15zM16,10H17V11H16zM20,10H21V11H20zM21,10H22V11H21zM22,10H23V11H22zM23,10H24V11H23zM26,10H27V11H26zM29,10H30V11H29zM1,11H2V12H1zM3,11H4V12H3zM4,11H5V12H4zM5,11H6V12H5zM7,11H8V12H7zM8,11H9V12H8zM9,11H10V12H9zM12,11H13V12H12zM13,11H14V12H13zM17,11H18V12H17zM18,11H19V12H18zM20,11H21V12H20zM22,11H23V12H22zM23,11H24V12H23zM24,11H25V12H24zM25,11H26V12H25zM26,11H27V12H26zM27,11H28V12H27zM28,11H29V12H28zM1,12H2V13H1zM4,12H5V13H4zM8,12H9V13H8zM12,12H13V13H12zM13,12H14V13H13zM15,12H16V13H15zM16,12H17V13H16zM19,12H20V13H19zM23,12H24V13H23zM24,12H25V13H24zM25,12H26V13H25zM27,12H28V13H27zM28,12H29V13H28zM2,13H3V14H2zM5,13H6V14H5zM7,13H8V14H7zM10,13H11V14H10zM11,13H12V14H11zM17,13H18V14H17zM18,13H19V14H18zM20,13H21V14H20zM21,13H22V14H21zM23,13H24V14H23zM26,13H27V14H26zM28,13H29V14H28zM29,13H30V14H29zM2,14H3V15H2zM3,14H4V15H3zM6,14H7V15H6zM9,14H10V15H9zM10,14H11V15H10zM11,14H12V15H11zM13,14H14V15H13zM16,14H17V15H16zM18,14H19V15H18zM19,14H20V15H19zM20,14H21V15H20zM22,14H23V15H22zM7,15H8V16H7zM8,15H9V16H8zM9,15H10V16H9zM11,15H12V16H11zM12,15H13V16H12zM16,15H17V16H16zM17,15H18V16H17zM19,15H20V16H19zM21,15H22V16H21zM22,15H23V16H22zM24,15H25V16H24zM26,15H27V16H26zM27,15H28V16H27zM28,15H29V16H28zM29,15H30V16H29zM1,16H2V17H1zM2,16H3V17H2zM5,16H6V17H5zM6,16H7V17H6zM8,16H9V17H8zM9,16H10V17H9zM14,16H15V17H14zM15,16H16V17H15zM17,16H18V17H17zM18,16H19V17H18zM20,16H21V17H20zM21,16H22V17H21zM22,16H23V17H22zM23,16H24V17H23zM25,16H26V17H25zM26,16H27V17H26zM28,16H29V17H28zM1,17H2V18H1zM3,17H4V18H3zM6,17H7V18H6zM7,17H8V18H7zM8,17H9V18H8zM10,17H11V18H10zM11,17H12V18H11zM12,17H13V18H12zM14,17H15V18H14zM15,17H16V18H15zM16,17H17V18H16zM18,17H19V18H18zM20,17H21V18H20zM22,17H23V18H22zM28,17H29V18H28zM2,18H3V19H2zM3,18H4V19H3zM5,18H6V19H5zM9,18H10V19H9zM10,18H11V19H10zM11,18H12V19H11zM12,18H13V19H12zM16,18H17V19H16zM22,18H23V19H22zM23,18H24V19H23zM24,18H25V19H24zM26,18H27V19H26zM29,18H30V19H29zM1,19H2V20H1zM7,19H8V20H7zM8,19H9V20H8zM10,19H11V20H10zM14,19H15V20H14zM17,19H18V20H17zM23,19H24V20H23zM24,19H25V20H24zM25,19H26V20H25zM28,19H29V20H28zM29,19H30V20H29zM5,20H6V21H5zM6,20H7V21H6zM8,20H9V21H8zM9,20H10V21H9zM12,20H13V21H12zM14,20H15V21H14zM18,20H19V21H18zM19,20H20V21H19zM20,20H21V21H20zM21,20H22V21H21zM28,20H29V21H28zM29,20H30V21H29zM1,21H2V22H1zM7,21H8V22H7zM8,21H9V22H8zM9,21H10V22H9zM11,21H12V22H11zM12,21H13V22H12zM13,21H14V22H13zM15,21H16V22H15zM16,21H17V22H16zM17,21H18V22H17zM20,21H21V22H20zM21,21H22V22H21zM22,21H23V22H22zM23,21H24V22H23zM24,21H25V22H24zM25,21H26V22H25zM27,21H28V22H27zM9,22H10V23H9zM10,22H11V23H10zM11,22H12V23H11zM12,22H13V23H12zM14,22H15V23H14zM17,22H18V23H17zM18,22H19V23H18zM20,22H21V23H20zM21,22H22V23H21zM25,22H26V23H25zM27,22H28V23H27zM28,22H29V23H28zM29,22H30V23H29zM1,23H2V24H1zM2,23H3V24H2zM3,23H4V24H3zM4,23H5V24H4zM5,23H6V24H5zM6,23H7V24H6zM7,23H8V24H7zM10,23H11V24H10zM11,23H12V24H11zM12,23H13V24H12zM13,23H14V24H13zM14,23H15V24H14zM15,23H16V24H15zM17,23H18V24H17zM18,23H19V24H18zM21,23H22V24H21zM23,23H24V24H23zM25,23H26V24H25zM28,23H29V24H28zM1,24H2V25H1zM7,24H8V25H7zM9,24H10V25H9zM10,24H11V25H10zM11,24H12V25H11zM13,24H14V25H13zM14,24H15V25H14zM16,24H17V25H16zM17,24H18V25H17zM19,24H20V25H19zM20,24H21V25H20zM21,24H22V25H21zM25,24H26V25H25zM26,24H27V25H26zM27,24H28V25H27zM28,24H29V25H28zM1,25H2V26H1zM3,25H4V26H3zM4,25H5V26H4zM5,25H6V26H5zM7,25H8V26H7zM10,25H11V26H10zM12,25H13V26H12zM13,25H14V26H13zM15,25H16V26H15zM17,25H18V26H17zM18,25H19V26H18zM21,25H22V26H21zM22,25H23V26H22zM23,25H24V26H23zM24,25H25V26H24zM25,25H26V26H25zM29,25H30V26H29zM1,26H2V27H1zM3,26H4V27H3zM4,26H5V27H4zM5,26H6V27H5zM7,26H8V27H7zM9,26H10V27H9zM10,26H11V27H10zM11,26H12V27H11zM12,26H13V27H12zM13,26H14V27H13zM15,26H16V27H15zM18,26H19V27H18zM19,26H20V27H19zM20,26H21V27H20zM23,26H24V27H23zM24,26H25V27H24zM25,26H26V27H25zM26,26H27V27H26zM27,26H28V27H27zM28,26H29V27H28zM1,27H2V28H1zM3,27H4V28H3zM4,27H5V28H4zM5,27H6V28H5zM7,27H8V28H7zM10,27H11V28H10zM12,27H13V28H12zM14,27H15V28H14zM19,27H20V28H19zM20,27H21V28H20zM21,27H22V28H21zM25,27H26V28H25zM26,27H27V28H26zM27,27H28V28H27zM29,27H30V28H29zM1,28H2V29H1zM7,28H8V29H7zM10,28H11V29H10zM11,28H12V29H11zM16,28H17V29H16zM17,28H18V29H17zM18,28H19V29H18zM20,28H21V29H20zM21,28H22V29H21zM23,28H24V29H23zM24,28H25V29H24zM25,28H26V29H25zM28,28H29V29H28zM1,29H2V30H1zM2,29H3V30H2zM3,29H4V30H3zM4,29H5V30H4zM5,29H6V30H5zM6,29H7V30H6zM7,29H8V30H7zM9,29H10V30H9zM10,29H11V30H10zM15,29H16V30H15zM18,29H19V30H18zM21,29H22V30H21zM22,29H23V30H22zM23,29H24V30H23zM24,29H25V30H24zM25,29H26V30H25zM28,29H29V30H28z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg>Venmo<br>@Seymoregreen</div>
+  <p>Pay after you approve your proof. We take Cash App, Venmo, PayPal, and cash in the shop.</p>
+ </div>
+</section>
+
+<footer>
+ Call or text <a href="tel:+18444739667">844-4-SEYMOR (844-473-9667)</a><br>
+ <a href="mailto:info@seymoregreen.com">info@seymoregreen.com</a>
+</footer>
+</div>
+</div>
+
+<script>
+(function(){
+ const f=document.getElementById('order');
+ const sizes=[...f.querySelectorAll('.sizes input')];
+ const combo=document.getElementById('combo');
+ const out=document.getElementById('totalOut');
+ const warn=document.getElementById('minWarn');
+ const err=document.getElementById('formErr');
+ function calc(){
+  let shirts=0,teeCost=0;
+  const ps=document.getElementById('printStyle');const base=Number(ps.options[ps.selectedIndex].dataset.price);
+  sizes.forEach(i=>{const n=Math.max(0,parseInt(i.value,10)||0);shirts+=n;teeCost+=n*(base+Number(i.dataset.up));});
+  const pk=f.querySelector('input[name=button_package]:checked');
+  let btn=pk?Number(pk.dataset.price):0;
+  const pack=shirts>=24;
+  document.getElementById('bizPack').value=pack?'Yes - 25 free matching buttons':'No';
+  document.getElementById('packOn').classList.toggle('show',pack);
+  document.getElementById('packNudge').classList.toggle('show',shirts>=12&&shirts<24);
+  document.getElementById('packNeed').textContent=24-shirts;
+  const comboOk=shirts>=12&&!pack;
+  combo.disabled=!comboOk; if(!comboOk) combo.checked=false;
+  if(combo.checked) btn+=40;
+  const total=teeCost+btn;
+  out.textContent='$'+total.toLocaleString();
+  document.getElementById('estTotal').value='$'+total;
+  document.getElementById('shirtCount').value=shirts;
+  document.getElementById('teeCount').textContent=shirts+(shirts===1?' shirt':' shirts');
+  const short=shirts>0&&shirts<12;
+  warn.classList.toggle('show',short);
+  document.getElementById('needMore').textContent=12-shirts;
+  return {shirts,total,short};
+ }
+ f.addEventListener('input',calc); f.addEventListener('change',calc); calc();
+
+ f.addEventListener('submit',async e=>{
+  e.preventDefault(); err.textContent='';
+  const s=calc();
+  if(s.short){err.textContent='Add at least 12 shirts, or set shirt quantities to 0 for a buttons-only order.';warn.scrollIntoView({block:'center'});return;}
+  if(s.total===0){err.textContent='Add shirts or pick a button package to place an order.';return;}
+  const bytes=[...f.querySelectorAll('input[type=file]')].reduce((t,i)=>t+(i.files[0]?i.files[0].size:0),0);
+  if(bytes>8*1024*1024){err.textContent='Your design files add up to more than 8 MB. Use smaller files, or email them to info@seymoregreen.com and mention it in the notes.';return;}
+  if(!f.reportValidity()) return;
+  const b=document.getElementById('sendBtn'); b.disabled=true; b.textContent='Sending…';
+  try{
+   const r=await fetch('/',{method:'POST',body:new FormData(f)});
+   if(!r.ok) throw new Error(r.status);
+   f.classList.add('hidden');
+   const d=document.getElementById('done'); d.classList.remove('hidden'); d.focus(); d.scrollIntoView({block:'start'});
+  }catch(x){
+   err.textContent="Your order didn't go through. Check your connection and press Send my order again, or call 844-473-9667.";
+   b.disabled=false; b.textContent='Send my order';
+  }
+ });
+})();
+</script>
+
+<script>
+(function(){
+ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));}
+ const bar=document.getElementById('installBar'),btn=document.getElementById('installBtn'),msg=document.getElementById('installMsg');
+ const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+ let dismissed=false;try{dismissed=localStorage.getItem('sgInstallDismissed')==='1'}catch(e){}
+ if(standalone||dismissed) return;
+ let deferred=null;
+ window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;bar.classList.add('show');});
+ const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+ if(ios){msg.textContent='Add this form to your home screen: tap the Share button, then "Add to Home Screen."';btn.style.display='none';bar.classList.add('show');}
+ btn.addEventListener('click',async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;bar.classList.remove('show');});
+ document.getElementById('installClose').addEventListener('click',()=>{bar.classList.remove('show');try{localStorage.setItem('sgInstallDismissed','1')}catch(e){}});
+ window.addEventListener('appinstalled',()=>bar.classList.remove('show'));
+})();
+</script>
+</body>
+</html>
